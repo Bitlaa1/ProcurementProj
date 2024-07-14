@@ -9,13 +9,17 @@ class LoginForm(forms.Form):
 
 
 class ProducerRegistrationForm(forms.ModelForm):
-    username = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=150)
     password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
+    company_name = forms.CharField(max_length=100)
+    address = forms.CharField(max_length=100)
+    contact_number = forms.CharField(max_length=100)
+    email = forms.EmailField()
 
     class Meta:
         model = Producer
-        fields = ['company_name', 'address', 'contact_number', 'email']
+        fields = ['username', 'password', 'confirm_password', 'company_name', 'address', 'contact_number', 'email']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -42,3 +46,6 @@ class ProducerRegistrationForm(forms.ModelForm):
         if commit:
             producer.save()
         return producer
+
+# class CustomPasswordResetForm(PasswordResetForm):
+#     email = forms.EmailField(max_length=100)

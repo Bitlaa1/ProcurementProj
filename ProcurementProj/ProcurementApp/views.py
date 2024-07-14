@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth.forms import PasswordResetForm
+from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth import authenticate, login
 from .forms import ProducerRegistrationForm, LoginForm
 from .models import Producer
@@ -20,57 +24,32 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-def loginauth(request):
+def signin(request):
+    form = LoginForm()
+    return render(request, 'login.html', {'form': form})
+
+
+def userauthenticate(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
+
+            user = authenticate(username=username, password=password)
+
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Change 'home' to your home view name
+                return redirect('home')
             else:
-                form.add_error(None, "Invalid username or password")
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+                messages.error(request, "Invalid credentials")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    return redirect('login')
 
-
-def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')  # Redirect to home view after login
-            else:
-                form.add_error(None, "Invalid username or password")
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form': form})
 
 def register(request):
-    if request.method == 'POST':
-        form = ProducerRegistrationForm(request.POST)
-        if form.is_valid():
-            user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
-            )
-            Producer.objects.create(
-                user=user,
-                company_name=form.cleaned_data['company_name'],
-                address=form.cleaned_data['address'],
-                contact_number=form.cleaned_data['contact_number'],
-                email=form.cleaned_data['email']
-            )
-            return redirect('login')
-    else:
-        form = ProducerRegistrationForm()
+    form = ProducerRegistrationForm()
     return render(request, 'register.html', {'form': form})
 
 
@@ -78,8 +57,41 @@ def registerauth(request):
     if request.method == 'POST':
         form = ProducerRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save()  # Save the form which returns the user object
+            messages.success(request, "Registration successful. You can now log in.")
+            return redirect('home')  # Redirect to home page after successful registration
+        else:
+            messages.error(request, "Please correct the errors below.")
+            return render(request, 'register.html', {'form': form})
     else:
         form = ProducerRegistrationForm()
+
     return render(request, 'register.html', {'form': form})
+
+# def forgot_password(request):
+#     if request.method == 'POST':
+#         password_reset_form = PasswordResetForm(request.POST)
+#         if password_reset_form.is_valid():
+#             data = password_reset_form.cleaned_data['email']
+#             associated_users = User.objects.filter(Q(email=data))
+#             if associated_users.exists():
+#                 for user in associated_users:
+#                     subject = "Password Reset Requested"
+#                     email_template_name = "password_reset_email.txt"
+#                     c = {
+#                         "email": user.email,
+#                         'domain': request.META['HTTP_HOST'],
+#                         'site_name': 'Your Site',
+#                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+#                         "user": user,
+#                         'token': default_token_generator.make_token(user),
+#                         'protocol': 'http',
+#                     }
+#                     email = render_to_string(email_template_name, c)
+#                     try:
+#                         send_mail(subject, email, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+#                     except BadHeaderError:
+#                         return HttpResponse('Invalid header found.')
+#                     return redirect("password_reset_done")
+#     password_reset_form = PasswordResetForm()
+#     return render(request, 'forgetpassword.html', {'forget_password': forgot_password()})
