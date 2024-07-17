@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.forms import PasswordResetForm
-from django.core.mail import send_mail
-from django.conf import settings
+# from django.contrib.auth.forms import PasswordResetForm
+# from django.core.mail import send_mail
+# from django.conf import settings
 from django.contrib.auth import authenticate, login
 from .forms import ProducerRegistrationForm, LoginForm
 from .models import Producer
@@ -24,49 +24,30 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-def signin(request):
-    form = LoginForm()
-    return render(request, 'login.html', {'form': form})
-
-
-def userauthenticate(request):
+def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request, "Invalid credentials")
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home2')
         else:
-            messages.error(request, "Please correct the errors below.")
-    return redirect('login')
+            messages.error(request, 'Invalid credentials')
+    return render(request, 'login.html')
 
 
 def register(request):
-    form = ProducerRegistrationForm()
-    return render(request, 'register.html', {'form': form})
-
-
-def registerauth(request):
     if request.method == 'POST':
-        form = ProducerRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()  # Save the form which returns the user object
-            messages.success(request, "Registration successful. You can now log in.")
-            return redirect('home')  # Redirect to home page after successful registration
-        else:
-            messages.error(request, "Please correct the errors below.")
-            return render(request, 'register.html', {'form': form})
-    else:
-        form = ProducerRegistrationForm()
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+        user = User.objects.create_user(username=username, password=password, email=email)
+        user.save()
+        messages.success(request, 'Account created successfully')
+        return redirect('login')
+    return render(request, 'register.html')
 
-    return render(request, 'register.html', {'form': form})
 
 # def forgot_password(request):
 #     if request.method == 'POST':
@@ -95,3 +76,7 @@ def registerauth(request):
 #                     return redirect("password_reset_done")
 #     password_reset_form = PasswordResetForm()
 #     return render(request, 'forgetpassword.html', {'forget_password': forgot_password()})
+
+
+def home2(request):
+    return render(request, 'home2.html')

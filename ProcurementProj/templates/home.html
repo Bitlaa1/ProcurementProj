@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,12 +10,13 @@
     <title>Home</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Welcome, {{ user.username }}</h2>
-        <p>This is the home page.</p>
-        <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
-        <a href="{% url 'register' %}" class="btn btn-outline-primary">Signup</a>
+{% block content %}
+<div class="container">
+    <h2>Welcome to the Procurement System</h2>
+    <p>Please log in or register to continue.</p>
+    <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-primary">Signup</a>
     </div>
-    
+{% endblock %}
 </body>
 </html>

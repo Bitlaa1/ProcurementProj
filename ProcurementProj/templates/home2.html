@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+{% block title %}
+    <title>Welcome {{ user.username }}</title>
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <h2>Welcome, {{ user.username }}</h2>
+    <p>This is the home page.</p>
+{#    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>#}
+    </div>
+{% endblock %}

@@ -33,8 +33,9 @@ ALLOWED_HOSTS = []
 # EMAIL_HOST_USER = 'your_email@gmail.com'
 # EMAIL_HOST_PASSWORD = 'your_email_password'
 
-# Application definition
 
+# Application definition
+LOGIN_REDIRECT_URL = 'home2'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ProcurementApp.apps.ProcurementappConfig',
-    'crispy_forms'
 ]
 
 MIDDLEWARE = [
