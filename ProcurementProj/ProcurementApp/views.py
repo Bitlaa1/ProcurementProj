@@ -7,7 +7,10 @@ from django.contrib import messages
 # from django.contrib.auth.forms import PasswordResetForm
 # from django.core.mail import send_mail
 # from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from .models import UserProfile
+
+
 # from .forms import ProducerRegistrationForm, ProducerForm
 
 # Create your views here.
@@ -22,6 +25,11 @@ def about(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home2')
 
 
 def login_view(request):
@@ -59,19 +67,21 @@ def register(request):
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 user.first_name = first_name
-                # user.middle_name = middle_name
                 user.last_name = last_name
                 user.save()
-                # Assuming you have a UserProfile model for additional fields
-                # user.profile.country_code = country_code
-                # user.profile.phone_number = phone_number
-                # user.profile.address1 = address1
-                # user.profile.address2 = address2
-                # user.profile.city = city
-                # user.profile.state = state
-                # user.profile.country = country
-                # user.profile.zip_code = zip_code
-                # user.profile.save()
+                profile = UserProfile.objects.create(
+                    user=user,
+                    middle_name=middle_name,
+                    country_code=country_code,
+                    phone_number=phone_number,
+                    address1=address1,
+                    address2=address2,
+                    city=city,
+                    state=state,
+                    country=country,
+                    zip_code=zip_code
+                )
+                profile.save()
                 login(request, user)
                 return redirect('home2')
             except IntegrityError:
