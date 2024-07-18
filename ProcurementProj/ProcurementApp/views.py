@@ -1,3 +1,5 @@
+from django.db import IntegrityError
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
@@ -6,9 +8,7 @@ from django.contrib import messages
 # from django.core.mail import send_mail
 # from django.conf import settings
 from django.contrib.auth import authenticate, login
-from .forms import ProducerRegistrationForm, LoginForm
-from .models import Producer
-
+# from .forms import ProducerRegistrationForm, ProducerForm
 
 # Create your views here.
 
@@ -39,13 +39,45 @@ def login_view(request):
 
 def register(request):
     if request.method == 'POST':
+        first_name = request.POST['first_name']
+        middle_name = request.POST['middle_name']
+        last_name = request.POST['last_name']
         username = request.POST['username']
-        password = request.POST['password']
         email = request.POST['email']
-        user = User.objects.create_user(username=username, password=password, email=email)
-        user.save()
-        messages.success(request, 'Account created successfully')
-        return redirect('login')
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+        country_code = request.POST['country_code']
+        phone_number = request.POST['phone_number']
+        address1 = request.POST['address1']
+        address2 = request.POST['address2']
+        city = request.POST['city']
+        state = request.POST['state']
+        country = request.POST['country']
+        zip_code = request.POST['zip_code']
+
+        if password == confirm_password:
+            try:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.first_name = first_name
+                # user.middle_name = middle_name
+                user.last_name = last_name
+                user.save()
+                # Assuming you have a UserProfile model for additional fields
+                # user.profile.country_code = country_code
+                # user.profile.phone_number = phone_number
+                # user.profile.address1 = address1
+                # user.profile.address2 = address2
+                # user.profile.city = city
+                # user.profile.state = state
+                # user.profile.country = country
+                # user.profile.zip_code = zip_code
+                # user.profile.save()
+                login(request, user)
+                return redirect('home2')
+            except IntegrityError:
+                return render(request, 'register.html', {'error': 'Username or email already exists'})
+        else:
+            return render(request, 'register.html', {'error': 'Passwords do not match'})
     return render(request, 'register.html')
 
 

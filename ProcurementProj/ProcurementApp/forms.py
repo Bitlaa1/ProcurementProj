@@ -1,51 +1,31 @@
-from django import forms
-from django.contrib.auth.models import User
-from .models import Producer
-
-
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=100)
-    password = forms.CharField(widget=forms.PasswordInput)
-
-
-class ProducerRegistrationForm(forms.ModelForm):
-    username = forms.CharField(max_length=150)
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(widget=forms.PasswordInput)
-    company_name = forms.CharField(max_length=100)
-    address = forms.CharField(max_length=100)
-    contact_number = forms.CharField(max_length=100)
-    email = forms.EmailField()
-
-    class Meta:
-        model = Producer
-        fields = ['username', 'password', 'confirm_password', 'company_name', 'address', 'contact_number', 'email']
-
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-
-        if password != confirm_password:
-            raise forms.ValidationError("Passwords do not match")
-
-        return cleaned_data
-
-    def save(self, commit=True):
-        user = User.objects.create_user(
-            username=self.cleaned_data['username'],
-            password=self.cleaned_data['password']
-        )
-        producer = Producer(
-            user=user,
-            company_name=self.cleaned_data['company_name'],
-            address=self.cleaned_data['address'],
-            contact_number=self.cleaned_data['contact_number'],
-            email=self.cleaned_data['email']
-        )
-        if commit:
-            producer.save()
-        return producer
-
-# class CustomPasswordResetForm(PasswordResetForm):
-#     email = forms.EmailField(max_length=100)
+# from django import forms
+# from django.contrib.auth.models import User
+# from .models import Producer
+#
+#
+# class ProducerRegistrationForm(forms.ModelForm):
+#     password = forms.CharField(widget=forms.PasswordInput)
+#     confirm_password = forms.CharField(widget=forms.PasswordInput)
+#
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'password']
+#
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         password = cleaned_data.get("password")
+#         confirm_password = cleaned_data.get("confirm_password")
+#
+#         if password != confirm_password:
+#             raise forms.ValidationError("Passwords do not match")
+#         return cleaned_data
+#
+#
+# class ProducerForm(forms.ModelForm):
+#     class Meta:
+#         model = Producer
+#         fields = ['first_name', 'middle_name', 'last_name', 'country_code', 'contact_number', 'address1', 'address2',
+#                   'city', 'state', 'country', 'zip_code']
+#
+# # class CustomPasswordResetForm(PasswordResetForm):
+# #     email = forms.EmailField(max_length=100)
