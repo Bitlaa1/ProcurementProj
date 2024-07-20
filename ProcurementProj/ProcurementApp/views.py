@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
@@ -9,7 +9,9 @@ from django.contrib import messages
 # from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
-
+from django.contrib.auth.views import PasswordResetView
+from django.core.mail import send_mail
+from django.conf import settings
 
 # from .forms import ProducerRegistrationForm, ProducerForm
 
@@ -91,33 +93,23 @@ def register(request):
     return render(request, 'register.html')
 
 
-# def forgot_password(request):
-#     if request.method == 'POST':
-#         password_reset_form = PasswordResetForm(request.POST)
-#         if password_reset_form.is_valid():
-#             data = password_reset_form.cleaned_data['email']
-#             associated_users = User.objects.filter(Q(email=data))
-#             if associated_users.exists():
-#                 for user in associated_users:
-#                     subject = "Password Reset Requested"
-#                     email_template_name = "password_reset_email.txt"
-#                     c = {
-#                         "email": user.email,
-#                         'domain': request.META['HTTP_HOST'],
-#                         'site_name': 'Your Site',
-#                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-#                         "user": user,
-#                         'token': default_token_generator.make_token(user),
-#                         'protocol': 'http',
-#                     }
-#                     email = render_to_string(email_template_name, c)
-#                     try:
-#                         send_mail(subject, email, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
-#                     except BadHeaderError:
-#                         return HttpResponse('Invalid header found.')
-#                     return redirect("password_reset_done")
-#     password_reset_form = PasswordResetForm()
-#     return render(request, 'forgetpassword.html', {'forget_password': forgot_password()})
+class ForgotPasswordView(PasswordResetView):
+    template_name = 'forgotpassword'
+    email_template_name = 'password_reset_email.html'
+    success_url = reverse_lazy('password_reset_done')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Send a custom confirmation email if needed
+        email = form.cleaned_data.get('email')
+        send_mail(
+            'Password Reset Request',
+            'We have received a request to reset your password. Please check your email for further instructions.',
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+        )
+        return response
 
 
 def home2(request):
