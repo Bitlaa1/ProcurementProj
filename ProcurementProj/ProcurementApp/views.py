@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
+from .models import Profile
 from django.contrib import messages
 # from django.contrib.auth.forms import PasswordResetForm
 # from django.core.mail import send_mail
@@ -114,3 +115,38 @@ class ForgotPasswordView(PasswordResetView):
 
 def home2(request):
     return render(request, 'home2.html')
+
+
+def profile(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+
+        # Ensure the user object is available
+        user = request.user
+
+        # Update user fields
+        if first_name:
+            user.first_name = first_name
+        if last_name:
+            user.last_name = last_name
+        if email:
+            user.email = email
+        if phone_number:
+            # Assuming you have a profile model to handle additional fields
+            profile, created = Profile.objects.get_or_create(user=user)
+            profile.phone_number = phone_number
+            profile.save()
+
+        try:
+            user.save()
+            messages.success(request, 'Profile updated successfully')
+        except IntegrityError as e:
+            messages.error(request, f'Error updating profile: {e}')
+            return redirect('profile')
+
+        return redirect('profile')
+
+    return render(request, 'profile.html')

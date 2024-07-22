@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - {{ user.username }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+            position: relative;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: right;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        header .highlight, header .current a {
+            color: #0779e4;
+        }
+        header a:hover {
+            color: #ddd;
+        }
+        .showcase {
+            min-height: 400px;
+            background: url('https://source.unsplash.com/1600x400/?nature,water') no-repeat 0 -400px;
+            text-align: center;
+            color: #fff;
+        }
+        .showcase h1 {
+            margin-top: 100px;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        .showcase p {
+            font-size: 20px;
+        }
+        .content {
+            padding: 20px;
+            background: #fff;
+        }
+        .content h2 {
+            text-align: center;
+        }
+        .content p {
+            line-height: 1.6;
+        }
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: #333;
+            text-align: center;
+        }
+        .profile-info {
+            margin: 20px 0;
+        }
+        .profile-info label {
+            font-weight: bold;
+        }
+        .profile-info p {
+            margin: 5px 0;
+        }
+        .edit-icon {
+            color: #0779e4;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .edit-icon:hover {
+            color: #0056b3;
+        }
+        .edit-form {
+            display: none;
+            margin: 20px 0;
+        }
+        .edit-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .edit-form button {
+            background-color: #0779e4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .edit-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Welcome, {{ user.username }}</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'profile' %}" class="current">Profile</a></li>
+{#                    <li><a href="{% url 'settings' %}">Settings</a></li>#}
+{#                    <li><a href="{% url 'account_info' %}">Account Info</a></li>#}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="showcase">
+        <h1>Your Profile</h1>
+        <p>Update your profile information here.</p>
+    </div>
+    <div class="content">
+        <div class="container">
+            <h2>Profile Information</h2>
+            <div class="profile-info">
+                <label for="first_name">First Name:</label>
+                <p>{{ user.first_name }} <a href="#" class="edit-icon" onclick="toggleEdit('first_name')">✎</a></p>
+                <div id="edit_first_name" class="edit-form">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="first_name" value="{{ user.first_name }}" placeholder="Enter new first name">
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="profile-info">
+                <label for="last_name">Last Name:</label>
+                <p>{{ user.last_name }} <a href="#" class="edit-icon" onclick="toggleEdit('last_name')">✎</a></p>
+                <div id="edit_last_name" class="edit-form">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="last_name" value="{{ user.last_name }}" placeholder="Enter new last name">
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="profile-info">
+                <label for="email">Email:</label>
+                <p>{{ user.email }} <a href="#" class="edit-icon" onclick="toggleEdit('email')">✎</a></p>
+                <div id="edit_email" class="edit-form">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <input type="email" name="email" value="{{ user.email }}" placeholder="Enter new email">
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="profile-info">
+                <label for="phone_number">Phone Number:</label>
+                <p><a href="#" class="edit-icon" onclick="toggleEdit('phone_number')">✎</a></p>
+                <div id="edit_phone_number" class="edit-form">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="phone_number" value="#" placeholder="Enter new phone number">
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Procurement Platform &copy; 2024</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.classList.contains('show')) {
+                menu.classList.remove('show');
+            } else {
+                menu.classList.add('show');
+            }
+        }
+
+        function toggleEdit(field) {
+            var editForm = document.getElementById('edit_' + field);
+            if (editForm.style.display === 'block') {
+                editForm.style.display = 'none';
+            } else {
+                editForm.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
