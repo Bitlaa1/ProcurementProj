@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Product Images</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Images and Specifications</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="product">Select Product:</label>
+            <select name="product" id="product">
+                {% for product in products %}
+                <option value="{{ product.id }}">{{ product.name }}</option>
+                {% endfor %}
+            </select><br><br>
+            <label for="images">Upload Images:</label>
+            <input type="file" name="images" multiple><br><br>
+            <label for="specifications">Specifications:</label>
+            <textarea name="specifications" id="specifications" rows="4"></textarea><br><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html>
