@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Inventory Report</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Generate Inventory Report</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="report_type">Report Type:</label>
+            <select name="report_type" id="report_type">
+                <option value="stock_summary">Stock Summary</option>
+                <option value="sales_trends">Sales Trends</option>
+            </select><br><br>
+            <button type="submit">Generate Report</button>
+        </form>
+    </div>
+</body>
+</html>
