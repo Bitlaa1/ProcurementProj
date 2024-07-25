@@ -1,4 +1,6 @@
-# from django import forms
+from django import forms
+
+
 # from django.contrib.auth.models import User
 # from .models import Producer
 #
@@ -29,3 +31,19 @@
 #
 # # class CustomPasswordResetForm(PasswordResetForm):
 # #     email = forms.EmailField(max_length=100)
+
+class OrderForm(forms.Form):
+    product_pic = forms.CharField(max_length=255)
+    product_name = forms.CharField(max_length=255)
+    product_description = forms.CharField(widget=forms.Textarea)
+    quantity = forms.IntegerField()
+
+
+class FeedbackForm(forms.Form):
+    name = forms.CharField(max_length=255)
+    email = forms.EmailField()
+    feedback = forms.CharField(widget=forms.Textarea)
+
+
+class CartForm(forms.Form):
+    product = forms.CharField(max_length=255)

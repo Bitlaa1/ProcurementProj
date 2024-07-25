@@ -19,4 +19,9 @@ urlpatterns = [
 
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('profile/', views.profile, name='profile'),
+    path('index', views.index, name='index'),
+    path('place_order/', views.place_order, name='place_order'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('submit_feedback/', views.submit_feedback, name='submit_feedback'),
+    path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
 ]

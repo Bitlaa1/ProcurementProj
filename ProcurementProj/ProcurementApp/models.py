@@ -21,8 +21,25 @@ class UserProfile(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
+
     # other fields...
 
     def __str__(self):
         return self.user.username
 
+
+class Order(models.Model):
+    product_pic = models.CharField(max_length=255)
+    product_name = models.CharField(max_length=255)
+    product_description = models.TextField()
+    quantity = models.IntegerField()
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    feedback = models.TextField()
+
+
+class Cart(models.Model):
+    product_name = models.CharField(max_length=255)

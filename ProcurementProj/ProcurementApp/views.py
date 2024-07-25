@@ -3,7 +3,8 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Order, Feedback, Cart
+from .forms import OrderForm, FeedbackForm, CartForm
 from django.contrib import messages
 # from django.contrib.auth.forms import PasswordResetForm
 # from django.core.mail import send_mail
@@ -13,6 +14,7 @@ from .models import UserProfile
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.conf import settings
+
 
 # from .forms import ProducerRegistrationForm, ProducerForm
 
@@ -150,3 +152,56 @@ def profile(request):
         return redirect('profile')
 
     return render(request, 'profile.html')
+
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def place_order(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Order.objects.create(**data)
+            messages.success(request, 'Order placed successfully!')
+            return redirect('index')
+        else:
+            messages.error(request, 'All fields are required!')
+    else:
+        form = OrderForm()
+
+    return render(request, 'place_order.html', {'form': form})
+
+
+def checkout(request):
+    if request.method == 'POST':
+        return redirect('index')
+    order_details = request.GET.get('order_details')
+    return render(request, 'checkout.html', {'order_details': order_details})
+
+
+def submit_feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Feedback.objects.create(**data)
+            messages.success(request, 'Feedback submitted successfully!')
+            return redirect('index')
+        else:
+            messages.error(request, 'All fields are required!')
+    else:
+        form = FeedbackForm()
+
+    return render(request, 'submit_feedback.html', {'form': form})
+
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        form = CartForm(request.POST)
+        if form.is_valid():
+            product_name = form.cleaned_data['product']
+            Cart.objects.create(product_name=product_name)
+            messages.success(request, 'Product added to cart!')
+    return redirect('index')
