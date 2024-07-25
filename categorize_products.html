@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorize Products</title>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Categorize and Organize Products</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="product">Select Product:</label>
+            <select name="product" id="product">
+                {% for product in products %}
+                <option value="{{ product.id }}">{{ product.name }}</option>
+                {% endfor %}
+            </select><br><br>
+            <label for="category">Category:</label>
+            <input type="text" name="category" id="category"><br><br>
+            <button type="submit">Categorize</button>
+        </form>
+    </div>
+</body>
+</html>
