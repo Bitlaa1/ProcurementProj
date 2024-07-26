@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Procurement Platform</title>
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
+            color: #333;
+        }
+        a {
+            color: #0779e4;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #055a9c;
         }
         .container {
             width: 80%;
@@ -23,6 +33,7 @@
             min-height: 70px;
             border-bottom: #0779e4 3px solid;
             position: relative;
+            z-index: 10;
         }
         header a, footer a {
             color: #fff;
@@ -37,7 +48,7 @@
         header li {
             float: right;
             display: inline;
-            padding: 0 20px 0 20px;
+            padding: 0 20px;
         }
         header #branding {
             float: left;
@@ -55,29 +66,105 @@
         header a:hover {
             color: #ddd;
         }
-        .showcase {
-            min-height: 400px;
-            background: url('https://source.unsplash.com/1600x400/?nature,water') no-repeat 0 -400px;
+        .hero {
+            min-height: 500px;
+            background: url('https://source.unsplash.com/1600x800/?business,technology') no-repeat center center;
+            background-size: cover;
             text-align: center;
             color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
-        .showcase h1 {
-            margin-top: 100px;
-            font-size: 55px;
-            margin-bottom: 10px;
+        .hero h1 {
+            font-size: 60px;
+            margin: 0;
+            line-height: 1.2;
         }
-        .showcase p {
-            font-size: 20px;
+        .hero p {
+            font-size: 24px;
+            margin: 10px 0 20px;
         }
-        .content {
-            padding: 20px;
+        .btn {
+            display: inline-block;
+            font-size: 18px;
+            color: #fff;
+            background-color: #0779e4;
+            padding: 15px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #055a9c;
+        }
+        .services, .testimonials, .cta, .faq {
+            padding: 60px 0;
             background: #fff;
-        }
-        .content h2 {
             text-align: center;
         }
-        .content p {
-            line-height: 1.6;
+        .services h2, .testimonials h2, .cta h2, .faq h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .services .service, .testimonials .testimonial, .faq .faq-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .services .service h3, .testimonials .testimonial h3, .faq .faq-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .services .service p, .testimonials .testimonial p, .faq .faq-item p {
+            font-size: 16px;
+        }
+        .testimonials img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        .cta {
+            background: #0779e4;
+            color: #fff;
+        }
+        .cta p {
+            font-size: 20px;
+        }
+        .faq .faq-item {
+            text-align: left;
+            max-width: 800px;
+            margin: auto;
+        }
+        .faq .faq-item h3 {
+            cursor: pointer;
+            position: relative;
+            padding-right: 30px;
+        }
+        .faq .faq-item h3::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 24px;
+            color: #0779e4;
+        }
+        .faq .faq-item .content {
+            display: none;
+            padding-top: 10px;
+            font-size: 16px;
+        }
+        .faq .faq-item.expanded h3::after {
+            content: '-';
+        }
+        .faq .faq-item.expanded .content {
+            display: block;
         }
         footer {
             padding: 20px;
@@ -86,7 +173,9 @@
             background-color: #333;
             text-align: center;
         }
-        /* Mobile styles */
+        footer p {
+            margin: 0;
+        }
         .menu-toggle {
             display: none;
             cursor: pointer;
@@ -144,7 +233,7 @@
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
             <nav>
                 <ul>
-                    <li class="current"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="current"><a href="home.html">Home</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>
                     <li><a href="{% url 'register' %}">Register</a></li>
                 </ul>
@@ -155,19 +244,99 @@
             </div>
         </div>
     </header>
-    <div class="showcase">
-        <h1 style="color: black">Welcome to Our Procurement Platform</h1>
-        <p style="color: black">Streamline your procurement and sales processes while promoting sustainable business practices.</p>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Our Procurement Platform</h1>
+        <p>Transform your procurement processes and embrace sustainability.</p>
+        <a href="{% url 'register' %}" class="btn">Get Started</a>
     </div>
-    <div class="content">
+
+    <!-- Services Section -->
+    <div class="services">
         <div class="container">
-            <h2>About Our Platform</h2>
-            <p>Producer companies often grapple with significant challenges in managing procurement and sales operations efficiently. Our platform provides tools to track and visualize the environmental and social impact of procurement activities, including carbon footprint reduction, water usage optimization, and community development initiatives.</p>
+            <h2>Our Services</h2>
+            <div class="service">
+                <h3>Streamlined Procurement</h3>
+                <p>Manage your procurement activities efficiently with our user-friendly interface.</p>
+            </div>
+            <div class="service">
+                <h3>Advanced Analytics</h3>
+                <p>Gain insights into your procurement processes with our powerful analytics tools.</p>
+            </div>
+            <div class="service">
+                <h3>Sustainability Tracking</h3>
+                <p>Track and reduce your environmental impact with our sustainability features.</p>
+            </div>
         </div>
     </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial">
+                <img src="{% static 'images/vinay goud.jpg' %}" alt="User 1">
+                <h3>Jane Doe</h3>
+                <p>"This platform has revolutionized the way we handle procurement. The sustainability features are a game-changer."</p>
+            </div>
+            <div class="testimonial">
+                <img src="{% static 'images/John Smith.jpg' %}" alt="User 2">
+                <h3>John Smith</h3>
+                <p>"A highly effective tool for managing procurement and sales. The analytics are incredibly insightful."</p>
+            </div>
+            <div class="testimonial">
+                <img src="{% static 'images/Emily Johnson.jpg' %}" alt="User 3">
+                <h3>Emily Johnson</h3>
+                <p>"Easy to use and very effective. The sustainability tracking has made a huge difference in our operations."</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Join our platform today and start transforming your procurement processes.</p>
+            <a href="{% url 'register' %}" class="btn">Join Now</a>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">What is the Procurement Platform?</h3>
+                <div class="content">
+                    <p>Our platform is a comprehensive solution designed to streamline procurement and sales processes while promoting sustainability.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">How does the sustainability tracking work?</h3>
+                <div class="content">
+                    <p>We offer tools to track and visualize your environmental impact, helping you to optimize resource use and reduce your carbon footprint.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">Is there a free trial available?</h3>
+                <div class="content">
+                    <p>Yes, we offer a free trial period so you can explore our platform and its features before committing.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">How can I contact support?</h3>
+                <div class="content">
+                    <p>You can reach our support team via the contact form on our website or by emailing support@procurementplatform.com.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <p>Procurement Platform &copy; 2024</p>
+        <p>Procurement Platform &copy; 2024 | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
+
     <script>
         function toggleMenu() {
             var menu = document.getElementById('menu');
@@ -175,6 +344,19 @@
                 menu.classList.remove('show');
             } else {
                 menu.classList.add('show');
+            }
+        }
+
+        function toggleFAQ(element) {
+            var item = element.parentElement;
+            if (item.classList.contains('expanded')) {
+                item.classList.remove('expanded');
+            } else {
+                var allItems = document.querySelectorAll('.faq-item');
+                allItems.forEach(function(i) {
+                    i.classList.remove('expanded');
+                });
+                item.classList.add('expanded');
             }
         }
     </script>
