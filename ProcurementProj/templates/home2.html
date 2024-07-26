@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome {{ user.username }}</title>
+    <title>Eco-Friendly Procurement: Reducing Carbon Footprints in Agriculture</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
@@ -48,30 +48,59 @@
         header a:hover {
             color: #ddd;
         }
-        .showcase {
+        .hero {
+            position: relative;
             min-height: 400px;
-            background: url('https://source.unsplash.com/1600x400/?nature,water') no-repeat center center;
+            background: url('https://source.unsplash.com/1600x400/?agriculture,sustainability') no-repeat center center;
             background-size: cover;
             text-align: center;
             color: #fff;
+            padding: 100px 0;
         }
-        .showcase h1 {
-            margin-top: 100px;
+        .hero:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero h1 {
             font-size: 55px;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
         }
-        .showcase p {
+        .hero p {
             font-size: 20px;
+            position: relative;
+            z-index: 2;
         }
-        .content {
+        .hero .btn {
+            position: relative;
+            z-index: 2;
+            margin: 10px;
+        }
+        .features, .benefits, .testimonials, .cta, .resources {
             padding: 20px;
             background: #fff;
+            margin: 20px 0;
         }
-        .content h2 {
+        .features h2, .benefits h2, .testimonials h2, .cta h2, .resources h2 {
             text-align: center;
         }
-        .content p {
+        .features p, .benefits p, .testimonials p, .cta p, .resources p {
             line-height: 1.6;
+        }
+        .features .icon {
+            font-size: 40px;
+            color: #0779e4;
+            margin-right: 10px;
+        }
+        .testimonials .carousel-item {
+            text-align: center;
         }
         footer {
             padding: 20px;
@@ -80,66 +109,44 @@
             background-color: #333;
             text-align: center;
         }
-        @media (max-width: 768px) {
-            header ul {
-                float: none;
-                text-align: center;
-                width: 100%;
-            }
-            header li {
-                float: none;
-                display: block;
-                padding: 10px;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .navbar-nav {
-                margin-top: 10px;
-            }
-        }
-        .dropdown-menu {
-            border-radius: 10px;
+        footer ul {
+            list-style: none;
             padding: 0;
-            margin: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .dropdown-item {
-            border-radius: 10px;
-            padding: 10px 20px;
+        footer ul li {
+            display: inline;
+            margin: 0 15px;
         }
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        /* Dropdown Icon */
-        .dropdown-toggle::after {
-            display: none;
-        }
-        .dropdown-toggle {
-            display: flex;
-            align-items: center;
-            border-radius: 50%;
-            background-color: #333;
+        footer ul li a {
             color: #fff;
-            padding: 10px;
-            font-size: 18px;
+            text-decoration: none;
+        }
+        footer ul li a:hover {
+            text-decoration: underline;
+        }
+        .contact-form {
+            margin: 20px 0;
+        }
+        .contact-form .form-control {
+            margin-bottom: 10px;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0779e4;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
             cursor: pointer;
-            margin-left: 10px;
         }
-        .dropdown-toggle i {
-            margin-right: 5px;
-        }
-        .dropdown-toggle span {
-            margin-left: 5px;
-        }
-        .dropdown-menu .dropdown-item {
-            font-size: 14px;
-            padding: 10px 20px;
-        }
-        .dropdown-menu .dropdown-item:hover {
-            background-color: #e9ecef;
-            color: #333;
+        .back-to-top:hover {
+            background: #0555a1;
         }
     </style>
 </head>
@@ -180,21 +187,127 @@
             </nav>
         </div>
     </header>
-    <div class="showcase">
-        <h1>Welcome to Our Procurement Platform</h1>
-        <p>Streamline your procurement and sales processes while promoting sustainable business practices.</p>
+    
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Eco-Friendly Procurement: Reducing Carbon Footprints in Agriculture</h1>
+        <p>Empowering Farmers with Sustainable Solutions</p>
+        <a href="#" class="btn btn-primary">Learn More</a>
+        <a href="#" class="btn btn-secondary">Get Started</a>
     </div>
-    <div class="content">
+    
+    <!-- Key Features Section -->
+    <div class="features">
         <div class="container">
-            <h2>About Our Platform</h2>
-            <p>Producer companies often grapple with significant challenges in managing procurement and sales operations efficiently. Our platform provides tools to track and visualize the environmental and social impact of procurement activities, including carbon footprint reduction, water usage optimization, and community development initiatives.</p>
+            <h2>Key Features</h2>
+            <div class="d-flex flex-wrap justify-content-around">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="icon fas fa-leaf"></i>
+                    <p><strong>Carbon Footprint Tracking:</strong> Our platform helps you measure and reduce your carbon emissions effectively.</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="icon fas fa-tint"></i>
+                    <p><strong>Water Usage Optimization:</strong> Tools for efficient water management to improve sustainability.</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="icon fas fa-users"></i>
+                    <p><strong>Community Development Initiatives:</strong> Features that support local communities and foster development.</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="icon fas fa-chart-line"></i>
+                    <p><strong>Data-Driven Insights:</strong> Analytics and reporting tools that provide actionable insights for better decision-making.</p>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <!-- Benefits Section -->
+    <div class="benefits">
+        <div class="container">
+            <h2>Benefits to Farmers</h2>
+            <p><strong>Improved Sustainability:</strong> Achieve your sustainability goals with our advanced tools.</p>
+            <p><strong>Cost Savings:</strong> Reduce costs through efficient resource management and optimized processes.</p>
+            <p><strong>Enhanced Market Competitiveness:</strong> Boost your competitiveness and appeal to eco-conscious consumers.</p>
+        </div>
+    </div>
+    
+    <!-- Testimonials Section -->
+    <div class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p>"This platform has revolutionized our approach to sustainable farming. We are now more efficient and eco-friendly!" - Jane Doe</p>
+                    </div>
+                    <div class="carousel-item">
+                        <p>"The insights provided have been invaluable for our decision-making process. Highly recommended!" - John Smith</p>
+                    </div>
+                    <div class="carousel-item">
+                        <p>"A game-changer for our operations. The tracking tools are exceptional and easy to use." - Alice Johnson</p>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Call to Action Section -->
+    <div class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Farming Practices?</h2>
+            <p>Join us today and start your journey towards a more sustainable future.</p>
+            <a href="#" class="btn btn-primary">Get Started</a>
+        </div>
+    </div>
+    
+    <!-- Resources Section -->
+    <div class="resources">
+        <div class="container">
+            <h2>Useful Resources</h2>
+            <p><a href="#">Sustainability Guidelines</a></p>
+            <p><a href="#">Agricultural Best Practices</a></p>
+            <p><a href="#">Carbon Footprint Calculator</a></p>
+            <p><a href="#">Water Management Tips</a></p>
+        </div>
+    </div>
+    
+    <!-- Footer Section -->
     <footer>
-        <p>Procurement Platform &copy; 2024</p>
+        <div class="container">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+            <p>&copy; 2024 Eco-Friendly Procurement. All rights reserved.</p>
+            <div class="contact-form">
+                <h3>Contact Us</h3>
+                <form action="#" method="post">
+                    <input type="text" class="form-control" placeholder="Your Name" required>
+                    <input type="email" class="form-control" placeholder="Your Email" required>
+                    <textarea class="form-control" placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
     </footer>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
