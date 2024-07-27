@@ -204,4 +204,4 @@ def add_to_cart(request):
             product_name = form.cleaned_data['product']
             Cart.objects.create(product_name=product_name)
             messages.success(request, 'Product added to cart!')
-    return redirect('index')
+    return redirect('home2')
