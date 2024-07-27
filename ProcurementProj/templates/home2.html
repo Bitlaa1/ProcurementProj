@@ -169,7 +169,7 @@
                             <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="{% url 'contact_us' %}">Contact</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -177,8 +177,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="#">Account Info</a>
+                                <a class="dropdown-item" href="{% url 'setting_nav' %}">Settings</a>
                                 <a class="dropdown-item" href="{% url 'login' %}">Logout</a>
                             </div>
                         </li>
@@ -187,16 +186,14 @@
             </nav>
         </div>
     </header>
-    
-    <!-- Hero Section -->
+
     <div class="hero">
         <h1>Eco-Friendly Procurement: Reducing Carbon Footprints in Agriculture</h1>
         <p>Empowering Farmers with Sustainable Solutions</p>
-        <a href="#" class="btn btn-primary">Learn More</a>
-        <a href="#" class="btn btn-secondary">Get Started</a>
+        <a href="{% url 'learn_more' %}" class="btn btn-primary">Learn More</a>
+        <a href="{% url 'get_started' %}" class="btn btn-secondary">Get Started</a>
     </div>
-    
-    <!-- Key Features Section -->
+
     <div class="features">
         <div class="container">
             <h2>Key Features</h2>
@@ -220,8 +217,7 @@
             </div>
         </div>
     </div>
-    
-    <!-- Benefits Section -->
+
     <div class="benefits">
         <div class="container">
             <h2>Benefits to Farmers</h2>
@@ -230,8 +226,7 @@
             <p><strong>Enhanced Market Competitiveness:</strong> Boost your competitiveness and appeal to eco-conscious consumers.</p>
         </div>
     </div>
-    
-    <!-- Testimonials Section -->
+
     <div class="testimonials">
         <div class="container">
             <h2>What Our Users Say</h2>
@@ -258,8 +253,7 @@
             </div>
         </div>
     </div>
-    
-    <!-- Call to Action Section -->
+
     <div class="cta">
         <div class="container">
             <h2>Ready to Transform Your Farming Practices?</h2>
@@ -267,25 +261,22 @@
             <a href="#" class="btn btn-primary">Get Started</a>
         </div>
     </div>
-    
-    <!-- Resources Section -->
+
     <div class="resources">
         <div class="container">
             <h2>Useful Resources</h2>
-            <p><a href="#">Sustainability Guidelines</a></p>
+            <p><a href="{% url 'sustainability_guidelines' %}">Sustainability Guidelines</a></p>
             <p><a href="#">Agricultural Best Practices</a></p>
-            <p><a href="#">Carbon Footprint Calculator</a></p>
+            <p><a href="{% url 'carbonfootprintcalculator' %}">Carbon Footprint Calculator</a></p>
             <p><a href="#">Water Management Tips</a></p>
         </div>
     </div>
-    
-    <!-- Footer Section -->
+
     <footer>
         <div class="container">
             <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
+                <li><a href="{% url 'service_terms' %}">Terms of Service</a></li>
             </ul>
             <p>&copy; 2024 Eco-Friendly Procurement. All rights reserved.</p>
             <div class="contact-form">
@@ -299,13 +290,11 @@
             </div>
         </div>
     </footer>
-    
-    <!-- Back to Top Button -->
+
     <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

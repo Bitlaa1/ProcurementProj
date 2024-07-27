@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - Eco-Friendly Procurement</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            border-bottom: #0779e4 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .learn-more-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #0779e4;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="{% url 'home' %}">Procurement Platform</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user-circle"></i> <span>Welcome, {{ user.username }}</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="#">Account Info</a>
+                                <a class="dropdown-item" href="{% url 'login' %}">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="learn-more-content">
+            <h2>About Our Eco-Friendly Procurement Platform</h2>
+            <p>Our platform is designed to address the growing need for sustainable procurement practices. We provide a comprehensive suite of tools to help businesses streamline their procurement processes while minimizing their environmental impact.</p>
+
+            <h3>Why Choose Our Platform?</h3>
+            <p>Our solution offers a range of features that make procurement easier and more sustainable:</p>
+            <ul>
+                <li><strong>Efficiency:</strong> Automate procurement workflows, reduce manual processes, and increase productivity with our integrated tools.</li>
+                <li><strong>Sustainability:</strong> Track and manage carbon emissions, optimize water usage, and adopt best practices in sustainability.</li>
+                <li><strong>Analytics:</strong> Access powerful analytics to monitor performance, make data-driven decisions, and achieve your sustainability goals.</li>
+                <li><strong>Customization:</strong> Tailor the platform to meet your specific needs with flexible configurations and integration options.</li>
+            </ul>
+
+            <h3>Key Benefits:</h3>
+            <ul>
+                <li><strong>Streamlined Processes:</strong> Simplify procurement and inventory management, from order placement to delivery.</li>
+                <li><strong>Environmental Impact:</strong> Reduce your carbon footprint and contribute to a greener future with our sustainability features.</li>
+                <li><strong>Cost Savings:</strong> Optimize your procurement strategies to save on costs and improve profitability.</li>
+                <li><strong>Scalability:</strong> Scale with ease as your business grows and adapt to changing market conditions.</li>
+            </ul>
+
+            <h3>Get Started Today!</h3>
+            <p>Join us in revolutionizing procurement practices for a sustainable future. Explore our platform, take advantage of our tools, and start making a positive impact on the environment.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

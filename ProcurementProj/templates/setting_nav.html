@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Procurement Platform</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            margin: 20px auto;
+            width: 80%;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 20%;
+            background: #0062cc;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background: #0056b3;
+        }
+        .main-content {
+            width: 80%;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #0062cc;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .section form {
+            margin-top: 20px;
+        }
+        .section form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .section form input,
+        .section form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .section form button {
+            padding: 10px 20px;
+            color: #fff;
+            background: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .section form button:hover {
+            background: #218838;
+        }
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="#account-info">Account Info</a>
+            <a href="#notifications">Notifications</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#subscription">Subscription</a>
+            <a href="#language-region">Language & Region</a>
+            <a href="#connected-accounts">Connected Accounts</a>
+            <a href="#preferences">Preferences</a>
+            <a href="#support">Support</a>
+            <a href="#legal">Legal</a>
+        </div>
+        <div class="main-content">
+            <section id="account-info" class="section">
+                <h2>Account Info</h2>
+                <form>
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" name="current-password">
+
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="new-password">
+
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+
+                    <button type="submit">Change Password</button>
+                </form>
+            </section>
+
+            <section id="notifications" class="section">
+                <h2>Notifications</h2>
+                <form>
+                    <label for="email-notifications">Email Notifications</label>
+                    <select id="email-notifications" name="email-notifications">
+                        <option value="all">All Notifications</option>
+                        <option value="important">Only Important</option>
+                        <option value="none">None</option>
+                    </select>
+
+                    <label for="sms-notifications">SMS Notifications</label>
+                    <select id="sms-notifications" name="sms-notifications">
+                        <option value="all">All Notifications</option>
+                        <option value="important">Only Important</option>
+                        <option value="none">None</option>
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <section id="privacy" class="section">
+                <h2>Privacy</h2>
+                <form>
+                    <label for="profile-visibility">Profile Visibility</label>
+                    <select id="profile-visibility" name="profile-visibility">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                        <option value="friends-only">Friends Only</option>
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <section id="subscription" class="section">
+                <h2>Subscription</h2>
+                <form>
+                    <label for="subscription-plan">Subscription Plan</label>
+                    <select id="subscription-plan" name="subscription-plan">
+                        <option value="basic">Basic</option>
+                        <option value="premium">Premium</option>
+                        <option value="enterprise">Enterprise</option>
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <section id="language-region" class="section">
+                <h2>Language & Region</h2>
+                <form>
+                    <label for="language">Language</label>
+                    <select id="language" name="language">
+                        <option value="english">English</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="french">French</option>
+                    </select>
+
+                    <label for="region">Region</label>
+                    <select id="region" name="region">
+                        <option value="us">United States</option>
+                        <option value="eu">Europe</option>
+                        <option value="asia">Asia</option>
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <section id="connected-accounts" class="section">
+                <h2>Connected Accounts</h2>
+                <form>
+                    <label for="connect-google">Connect Google Account</label>
+                    <input type="checkbox" id="connect-google" name="connect-google">
+
+                    <label for="connect-facebook">Connect Facebook Account</label>
+                    <input type="checkbox" id="connect-facebook" name="connect-facebook">
+
+                    <label for="connect-linkedin">Connect LinkedIn Account</label>
+                    <input type="checkbox" id="connect-linkedin" name="connect-linkedin">
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <section id="preferences" class="section">
+                <h2>Preferences</h2>
+                <form>
+                    <label for="theme">Theme</label>
+                    <select id="theme" name="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+
+                    <label for="time-zone">Time Zone</label>
+                    <select id="time-zone" name="time-zone">
+                        <option value="pst">Pacific Standard Time (PST)</option>
+                        <option value="est">Eastern Standard Time (EST)</option>
+                        <option value="gmt">Greenwich Mean Time (GMT)</option>
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <section id="support" class="section">
+                <h2>Support</h2>
+                <form>
+                    <label for="support-query">How can we help you?</label>
+                    <textarea id="support-query" name="support-query" rows="5"></textarea>
+
+                    <button type="submit">Submit Query</button>
+                </form>
+            </section>
+
+            <section id="legal" class="section">
+                <h2>Legal</h2>
+                <form>
+                    <label for="terms-service">Accept Terms of Service</label>
+                    <input type="checkbox" id="terms-service" name="terms-service">
+
+                    <label for="privacy-policy">Accept Privacy Policy</label>
+                    <input type="checkbox" id="privacy-policy" name="privacy-policy">
+
+                    <button type="submit">Save Changes</button>
+                </form>
+            </section>
+
+            <footer class="footer">
+                <p>&copy; 2024 Procurement Platform. All Rights Reserved.</p>
+                <a href="{% url 'service_terms' %}">Terms of Service</a>
+                <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Settings page scripts loaded');
+        });
+    </script>
+</body>
+</html>

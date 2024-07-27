@@ -3,17 +3,15 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import Profile, Order, Feedback, Cart
-from .forms import OrderForm, FeedbackForm, CartForm
+from .models import Profile, Order, Feedback, Cart, ContactMessage
+from .forms import OrderForm, FeedbackForm, CartForm, ContactMessageForm
 from django.contrib import messages
-# from django.contrib.auth.forms import PasswordResetForm
-# from django.core.mail import send_mail
-# from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 
 # from .forms import ProducerRegistrationForm, ProducerForm
@@ -29,12 +27,29 @@ def about(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        form = ContactMessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages = ContactMessage.objects.all()  # Fetch all messages
+            return render(request, 'contact_success.html', {'messages': messages})
+    else:
+        form = ContactMessageForm()
+    return render(request, 'contact.html', {'form': form})
+
+
+def contact_success(request):
+    return render(request, 'contact_success.html')
 
 
 def logout_view(request):
     logout(request)
     return redirect('home2')
+
+
+def get_contact_messages(request):
+    messages = ContactMessage.objects.all().values('name', 'email', 'message')
+    return JsonResponse(list(messages), safe=False)
 
 
 def login_view(request):
@@ -205,3 +220,57 @@ def add_to_cart(request):
             Cart.objects.create(product_name=product_name)
             messages.success(request, 'Product added to cart!')
     return redirect('home2')
+
+
+def get_started(request):
+    return render(request, 'get_started.hml')
+
+
+def learn_more(request):
+    return render(request, 'learn_more.html')
+
+
+def carbon_footprint_calculator(request):
+    if request.method == 'POST':
+        energy_usage = float(request.POST.get('energyUsage', 0))
+        miles_driven = float(request.POST.get('milesDriven', 0))
+        waste_generated = float(request.POST.get('wasteGenerated', 0))
+
+        energy_factor = 0.233
+        mileage_factor = 0.211
+        waste_factor = 0.3
+
+        energy_emissions = energy_usage * energy_factor
+        mileage_emissions = miles_driven * mileage_factor
+        waste_emissions = waste_generated * waste_factor
+        total_emissions = energy_emissions + mileage_emissions + waste_emissions
+
+        return render(request, 'carbon_footprint.html', {
+            'total_emissions': total_emissions
+        })
+
+    return render(request, 'carbon_footprint.html')
+
+
+def sustainability_guidelines(request):
+    return render(request, 'sustainability_guidelines.html')
+
+
+def agricultural_best_practices(request):
+    return render(request, 'agricultural_best_practices.html')
+
+
+def tips_water_management(request):
+    return render(request, 'tips_water_management.html')
+
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+
+def service_terms(request):
+    return render(request, 'service_terms.html')
+
+
+def setting_nav(request):
+    return render(request, 'setting_nav.html')

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Best Practices - Procurement Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-primary {
+            background: #0779e4;
+        }
+        .btn-primary:hover {
+            background: #0555a1;
+        }
+        .section {
+            padding: 20px 0;
+        }
+        .section h2 {
+            margin-top: 0;
+        }
+        .mt-4 {
+            margin-top: 20px;
+        }
+        .footer {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background: #444;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background: #555;
+        }
+        .sub-section {
+            margin-top: 20px;
+        }
+        .sub-section h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Procurement Platform</h1>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="{% url 'home2' %}">Home</a>
+        <a href="{% url 'get_started' %}">Get Started</a>
+        <a href="{% url 'carbonfootprintcalculator' %}">Carbon Footprint Calculator</a>
+        <a href="{% url 'sustainability_guidelines' %}">Sustainability Guidelines</a>
+        <a href="{% url 'tips_water_management' %}">Water Management Tips</a>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <h2>Agricultural Best Practices</h2>
+            <p>Implementing best practices in agriculture enhances productivity, promotes sustainability, and protects the environment. Below are essential practices for optimizing agricultural operations and ensuring long-term success:</p>
+
+            <div class="sub-section">
+                <h3>1. Soil Management</h3>
+                <p>Maintaining healthy soil is crucial for successful farming. Implement practices such as:</p>
+                <ul>
+                    <li><strong>Soil Testing:</strong> Regularly test soil to determine its nutrient levels and pH. Adjust fertilization and lime application accordingly.</li>
+                    <li><strong>Organic Matter Addition:</strong> Incorporate compost, manure, or cover crops to enhance soil fertility and structure.</li>
+                    <li><strong>Reduced Tillage:</strong> Minimize soil disturbance by adopting conservation tillage techniques, which help preserve soil structure and reduce erosion.</li>
+                    <li><strong>Crop Residue Management:</strong> Leave crop residues on the field or incorporate them into the soil to improve organic matter content and prevent erosion.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>2. Crop Rotation</h3>
+                <p>Crop rotation involves alternating different crops in the same field across seasons. Benefits include:</p>
+                <ul>
+                    <li><strong>Soil Fertility:</strong> Different crops have varying nutrient requirements and can help balance soil nutrient levels.</li>
+                    <li><strong>Pest and Disease Management:</strong> Rotating crops can disrupt the life cycles of pests and diseases, reducing their impact.</li>
+                    <li><strong>Weed Control:</strong> Diverse crops can help suppress weed growth and reduce competition.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>3. Water Conservation</h3>
+                <p>Efficient water management is critical for sustainable agriculture. Implement the following practices:</p>
+                <ul>
+                    <li><strong>Drip Irrigation:</strong> Use drip irrigation systems to deliver water directly to plant roots, minimizing evaporation and runoff.</li>
+                    <li><strong>Rainwater Harvesting:</strong> Collect and store rainwater for use during dry periods, reducing reliance on groundwater and municipal water sources.</li>
+                    <li><strong>Soil Moisture Monitoring:</strong> Utilize soil moisture sensors to optimize irrigation schedules and prevent overwatering.</li>
+                    <li><strong>Conservation Tillage:</strong> Practice conservation tillage to improve soil structure and enhance water infiltration and retention.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>4. Pest and Disease Management</h3>
+                <p>Effective pest and disease management protects crops and maximizes yield. Consider these approaches:</p>
+                <ul>
+                    <li><strong>Integrated Pest Management (IPM):</strong> Combine biological, physical, and chemical control methods to manage pests sustainably.</li>
+                    <li><strong>Beneficial Insects:</strong> Introduce natural predators, such as ladybugs and lacewings, to control pest populations.</li>
+                    <li><strong>Crop Selection:</strong> Choose pest-resistant crop varieties to reduce the need for chemical treatments.</li>
+                    <li><strong>Regular Monitoring:</strong> Inspect crops frequently for signs of pests or diseases and take action promptly.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>5. Fertilizer Management</h3>
+                <p>Efficient fertilizer use maximizes crop yields and minimizes environmental impact. Follow these guidelines:</p>
+                <ul>
+                    <li><strong>Precision Fertilization:</strong> Apply fertilizers based on soil tests and crop needs to avoid over-application.</li>
+                    <li><strong>Split Applications:</strong> Divide fertilizer applications into multiple small doses to improve nutrient uptake and reduce runoff.</li>
+                    <li><strong>Organic Fertilizers:</strong> Utilize organic fertilizers, such as compost or manure, to enhance soil fertility and structure.</li>
+                    <li><strong>Timing and Placement:</strong> Apply fertilizers at times and in ways that optimize absorption and minimize losses.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>6. Sustainable Land Use</h3>
+                <p>Implementing sustainable land use practices helps preserve natural resources and maintain productivity:</p>
+                <ul>
+                    <li><strong>Buffer Zones:</strong> Establish buffer zones around water bodies to reduce runoff and protect aquatic ecosystems.</li>
+                    <li><strong>Agroforestry:</strong> Integrate trees and shrubs into agricultural systems to enhance biodiversity, improve soil health, and provide additional income sources.</li>
+                    <li><strong>Land Restoration:</strong> Restore degraded land through reforestation, cover cropping, and erosion control measures.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>7. Biodiversity Conservation</h3>
+                <p>Preserving biodiversity supports ecosystem health and resilience. Adopt the following practices:</p>
+                <ul>
+                    <li><strong>Habitat Preservation:</strong> Protect and restore natural habitats, such as wetlands and forests, within and around agricultural areas.</li>
+                    <li><strong>Pollinator Support:</strong> Provide habitats and resources for pollinators, such as bees and butterflies, to enhance crop pollination and yield.</li>
+                    <li><strong>Diverse Plantings:</strong> Grow a variety of crops and plants to promote biodiversity and support beneficial organisms.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>8. Climate Change Adaptation</h3>
+                <p>Adapting to climate change is essential for maintaining agricultural productivity. Consider these strategies:</p>
+                <ul>
+                    <li><strong>Resilient Crop Varieties:</strong> Choose crop varieties that are tolerant to changing climate conditions, such as drought or heat.</li>
+                    <li><strong>Water Management:</strong> Implement water-saving technologies and practices to cope with increased variability in precipitation.</li>
+                    <li><strong>Soil Conservation:</strong> Use soil conservation techniques to prevent erosion and maintain soil health in the face of changing weather patterns.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>9. Farm Management</h3>
+                <p>Effective farm management enhances overall productivity and sustainability:</p>
+                <ul>
+                    <li><strong>Record Keeping:</strong> Maintain detailed records of crop performance, inputs, and expenses to make informed decisions and improve management practices.</li>
+                    <li><strong>Training and Education:</strong> Invest in training and education for farm workers to stay updated on best practices and new technologies.</li>
+                    <li><strong>Technology Adoption:</strong> Utilize modern technologies, such as precision agriculture tools and data analytics, to optimize farm operations and decision-making.</li>
+                </ul>
+            </div>
+
+            <div class="sub-section mt-4">
+                <a href="#" class="btn btn-primary">Download Full Guidelines</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Procurement Platform. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Success - Procurement Platform</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        header {
+            background: #0062cc;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 4px solid #004085;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        .btn-primary {
+            background: #28a745;
+        }
+        .btn-primary:hover {
+            background: #218838;
+        }
+        .section {
+            padding: 20px 0;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #0062cc;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 2px solid #ddd;
+        }
+        .section p {
+            text-align: center;
+            font-size: 1.1em;
+            margin: 20px 0;
+        }
+        .messages {
+            list-style: none;
+            padding: 0;
+        }
+        .messages li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .messages li strong {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .footer {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 20px;
+            border-top: 4px solid #004085;
+        }
+        .footer a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            color: #fff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            background: #004085;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .navbar a:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            .btn {
+                padding: 8px 15px;
+            }
+            .section p {
+                font-size: 1em;
+            }
+        }
+        .animation-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .animation {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 5px solid #28a745;
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message-alert {
+            background: #e0ffe0;
+            color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #28a745;
+        }
+        .message-alert h3 {
+            margin-top: 0;
+        }
+        .thank-you {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .return-home {
+            display: block;
+            margin: 30px 0;
+            text-align: center;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Scripts loaded');
+
+            // Animation effect on page load
+            const animation = document.querySelector('.animation');
+            setTimeout(() => {
+                animation.style.display = 'none';
+            }, 3000);
+
+            // Dynamic thank you message
+            const thankYouMessage = document.querySelector('.thank-you');
+            thankYouMessage.innerHTML = 'We have received your message and will get back to you shortly.';
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Procurement Platform</h1>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="{% url 'home2' %}">Home</a>
+        <a href="{% url 'get_started' %}">Get Started</a>
+        <a href="{% url 'carbonfootprintcalculator' %}">Carbon Footprint Calculator</a>
+        <a href="{% url 'sustainability_guidelines' %}">Sustainability Guidelines</a>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <h2>Contact Message Sent Successfully</h2>
+            <div class="animation-container">
+                <div class="animation"></div>
+            </div>
+            <div class="message-alert">
+                <h3>Thank You!</h3>
+                <p class="thank-you"></p>
+            </div>
+            <p>Below are the messages we have received:</p>
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>
+                        <strong>Name:</strong> {{ message.name }}<br>
+                        <strong>Email:</strong> {{ message.email }}<br>
+                        <strong>Message:</strong> {{ message.message }}<br>
+                        <strong>Date:</strong> {{ message.date_submitted }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'home2' %}" class="btn btn-primary return-home">Return to Home</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Procurement Platform. All Rights Reserved.</p>
+            <a href="{% url 'service_terms' %}">Terms of Service</a>
+            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
+</html>

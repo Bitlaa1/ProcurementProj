@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - Procurement Platform</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        nav {
+            background: #222;
+            color: #fff;
+            padding: 10px 0;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-primary {
+            background: #0779e4;
+        }
+        .btn-primary:hover {
+            background: #0555a1;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .section {
+            padding: 20px 0;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        .mt-4 {
+            margin-top: 20px;
+        }
+        .carbon-calculator {
+            background: #eaf4f4;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .carbon-calculator h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .carbon-calculator .btn-primary {
+            background: #0779e4;
+            border: none;
+        }
+        .carbon-calculator .btn-primary:hover {
+            background: #0555a1;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+        .resources ul {
+            list-style: none;
+            padding: 0;
+        }
+        .resources ul li {
+            margin-bottom: 10px;
+        }
+        .resources ul li a {
+            color: #0779e4;
+            text-decoration: none;
+        }
+        .resources ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Procurement Platform</h1>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <a href="#carbonCalculator">Carbon Footprint Calculator</a>
+            <a href="#aboutProject">About Calculator Works</a>
+            <a href="#resources">Useful Resources</a>
+        </div>
+    </nav>
+
+    <section id="carbonCalculator" class="carbon-calculator">
+        <div class="container">
+            <h2>Carbon Footprint Calculator</h2>
+            <p>Use this tool to estimate your carbon footprint based on your energy usage, miles driven, and waste generated. This will help you understand your environmental impact and find ways to reduce it.</p>
+            <form id="carbonFootprintForm" action="{% url 'carbonfootprintcalculator' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="energyUsage">Energy Usage (kWh per month):</label>
+                    <input type="number" id="energyUsage" name="energyUsage" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="milesDriven">Miles Driven per Month:</label>
+                    <input type="number" id="milesDriven" name="milesDriven" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="wasteGenerated">Waste Generated (kg per month):</label>
+                    <input type="number" id="wasteGenerated" name="wasteGenerated" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+            <div id="carbonFootprintResult" class="mt-4"></div>
+        </div>
+    </section>
+
+    <section id="aboutProject" class="section">
+        <div class="container">
+            <h2>How the Calculator Works</h2>
+            <p>Our Carbon Footprint Calculator helps you understand the environmental impact of your daily activities by calculating the amount of CO2 emissions you generate. Here's how it works:</p>
+            <ol>
+                <li><strong>Energy Usage:</strong> Enter the amount of energy you consume each month in kilowatt-hours (kWh). This includes electricity used at home and in your business.</li>
+                <li><strong>Miles Driven:</strong> Input the number of miles you drive each month. This helps us estimate the emissions from your vehicle based on average fuel consumption.</li>
+                <li><strong>Waste Generated:</strong> Provide the total amount of waste you generate each month in kilograms. Waste contributes to CO2 emissions through decomposition in landfills.</li>
+            </ol>
+            <p>Our calculator uses specific coefficients for each type of activity to estimate your total CO2 emissions. These coefficients are based on standard emission factors for energy, transportation, and waste management.</p>
+            <p>Once you submit the form, you will receive an estimate of your total monthly CO2 emissions. This information can help you identify areas where you might reduce your carbon footprint and make more sustainable choices.</p>
+        </div>
+    </section>
+
+    <section id="resources" class="section resources">
+        <div class="container">
+            <h2>Useful Resources</h2>
+            <ul>
+                <li><a href="{% url 'sustainability_guidelines' %}">Sustainability Guidelines</a></li>
+                <li><a href="{% url 'agricultural_best_practices' %}">Agricultural Best Practices</a></li>
+                <li><a href="{% url 'tips_water_management' %}">Water Management Tips</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Procurement Platform. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('carbonFootprintForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get input values
+            var energyUsage = parseFloat(document.getElementById('energyUsage').value);
+            var milesDriven = parseFloat(document.getElementById('milesDriven').value);
+            var wasteGenerated = parseFloat(document.getElementById('wasteGenerated').value);
+
+            // Carbon footprint calculation (example coefficients)
+            var energyFactor = 0.233; // kg CO2 per kWh
+            var mileageFactor = 0.211; // kg CO2 per mile
+            var wasteFactor = 0.3; // kg CO2 per kg of waste
+
+            // Calculate CO2 emissions
+            var energyEmissions = energyUsage * energyFactor;
+            var mileageEmissions = milesDriven * mileageFactor;
+            var wasteEmissions = wasteGenerated * wasteFactor;
+
+            // Total emissions
+            var totalEmissions = energyEmissions + mileageEmissions + wasteEmissions;
+
+            // Display result
+            var resultDiv = document.getElementById('carbonFootprintResult');
+            resultDiv.innerHTML = `
+                <h3>Your Estimated Carbon Footprint</h3>
+                <p>Total CO2 Emissions: ${totalEmissions.toFixed(2)} kg CO2 per month</p>
+            `;
+        });
+    </script>
+</body>
+</html>
