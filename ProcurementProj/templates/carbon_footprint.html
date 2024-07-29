@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Started - Procurement Platform</title>
     <style>
-        /* General styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -203,25 +202,20 @@
         document.getElementById('carbonFootprintForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // Get input values
             var energyUsage = parseFloat(document.getElementById('energyUsage').value);
             var milesDriven = parseFloat(document.getElementById('milesDriven').value);
             var wasteGenerated = parseFloat(document.getElementById('wasteGenerated').value);
 
-            // Carbon footprint calculation (example coefficients)
-            var energyFactor = 0.233; // kg CO2 per kWh
-            var mileageFactor = 0.211; // kg CO2 per mile
-            var wasteFactor = 0.3; // kg CO2 per kg of waste
+            var energyFactor = 0.233;
+            var mileageFactor = 0.211;
+            var wasteFactor = 0.3;
 
-            // Calculate CO2 emissions
             var energyEmissions = energyUsage * energyFactor;
             var mileageEmissions = milesDriven * mileageFactor;
             var wasteEmissions = wasteGenerated * wasteFactor;
 
-            // Total emissions
             var totalEmissions = energyEmissions + mileageEmissions + wasteEmissions;
 
-            // Display result
             var resultDiv = document.getElementById('carbonFootprintResult');
             resultDiv.innerHTML = `
                 <h3>Your Estimated Carbon Footprint</h3>

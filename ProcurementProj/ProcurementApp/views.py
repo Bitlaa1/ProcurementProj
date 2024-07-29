@@ -7,11 +7,11 @@ from .models import Profile, Order, Feedback, Cart, ContactMessage
 from .forms import OrderForm, FeedbackForm, CartForm, ContactMessageForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import UserProfile
+from .models import UserProfile, Supplier
 from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, login_required
 
 
 # from .forms import ProducerRegistrationForm, ProducerForm
@@ -31,7 +31,7 @@ def contact(request):
         form = ContactMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            messages = ContactMessage.objects.all()  # Fetch all messages
+            messages = ContactMessage.objects.all()
             return render(request, 'contact_success.html', {'messages': messages})
     else:
         form = ContactMessageForm()
@@ -118,7 +118,6 @@ class ForgotPasswordView(PasswordResetView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        # Send a custom confirmation email if needed
         email = form.cleaned_data.get('email')
         send_mail(
             'Password Reset Request',
@@ -141,10 +140,8 @@ def profile(request):
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
 
-        # Ensure the user object is available
         user = request.user
 
-        # Update user fields
         if first_name:
             user.first_name = first_name
         if last_name:
@@ -152,7 +149,6 @@ def profile(request):
         if email:
             user.email = email
         if phone_number:
-            # Assuming you have a profile model to handle additional fields
             profile, created = Profile.objects.get_or_create(user=user)
             profile.phone_number = phone_number
             profile.save()
@@ -274,3 +270,80 @@ def service_terms(request):
 
 def setting_nav(request):
     return render(request, 'setting_nav.html')
+
+
+def supplier_register(request):
+    if request.method == "POST":
+        supplier_name = request.POST.get('supplier_name')
+        contact_person = request.POST.get('contact_person')
+        email = request.POST.get('email')
+        country_code = request.POST.get('country_code')
+        mobile_number = request.POST.get('mobile_number')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip_code = request.POST.get('zip_code')
+        country = request.POST.get('country')
+        product_category = request.POST.get('product_category')
+        payment_method = request.POST.get('payment_method')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        terms = request.POST.get('terms')
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+            return redirect('supplier_register')
+
+        if not terms:
+            messages.error(request, "You must agree to the terms and conditions.")
+            return redirect('supplier_register')
+
+        try:
+            user = User.objects.create_user(username=email, password=password, email=email, first_name=supplier_name,
+                                            last_name=contact_person)
+            user.save()
+            messages.success(request, "Account created successfully!")
+            login(request, user)  # Log the user in after registration
+            return redirect('supplier_home')
+        except Exception as e:
+            messages.error(request, f"Error creating account: {e}")
+            return redirect('supplier_register')
+
+    return render(request, 'suppliers_register.html')
+
+
+def supplier_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('supplier_home')
+        else:
+            return render(request, 'suppliers_login.html', {'error': 'Invalid email or password.'})
+    return render(request, 'suppliers_login.html')
+
+
+def supplier_home(request):
+    try:
+        supplier = Supplier.objects.get(user=request.user)
+    except Supplier.DoesNotExist:
+        return redirect('supplier_login')
+
+    context = {
+        'supplier_name': f"{supplier.first_name} {supplier.last_name}",
+        'contact_person': supplier.contact_person,
+        'email': supplier.email,
+        'country_code': supplier.country_code,
+        'mobile_number': supplier.mobile_number,
+        'address': supplier.address1,
+        'address2': supplier.address2,
+        'city': supplier.city,
+        'state': supplier.state,
+        'zip_code': supplier.zip_code,
+        'country': supplier.country,
+        'product_category': supplier.product_category,
+        'payment_method': supplier.payment_method
+    }
+    return render(request, 'supplier_home.html', context)

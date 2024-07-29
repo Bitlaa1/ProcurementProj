@@ -53,3 +53,22 @@ class ContactMessage(models.Model):
 
 class Cart(models.Model):
     product_name = models.CharField(max_length=255)
+
+
+class Supplier(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    contact_person = models.CharField(max_length=100)
+    email = models.EmailField()
+    country_code = models.CharField(max_length=10)
+    mobile_number = models.CharField(max_length=15)
+    address1 = models.CharField(max_length=255)
+    address2 = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=100)
+    product_category = models.CharField(max_length=100)
+    payment_method = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.contact_person

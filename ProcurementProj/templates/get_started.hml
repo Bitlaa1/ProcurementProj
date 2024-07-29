@@ -155,7 +155,6 @@
             </ol>
         </div>
 
-        <!-- Quick Start Guide -->
         <div class="quick-start-guide">
             <h2>Quick Start Guide</h2>
             <p>Watch these short videos to quickly get started with our platform:</p>
@@ -165,7 +164,6 @@
             <iframe src="https://www.youtube.com/embed/sMqtwbKc8EA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <!-- Useful Resources -->
         <div class="resource-links">
             <h2>Useful Resources</h2>
             <ul>
@@ -176,7 +174,6 @@
             </ul>
         </div>
 
-        <!-- Project Description -->
         <div class="project-description">
             <h2>About the Project</h2>
             <p>Our platform is at the forefront of transforming procurement and supply chain management by integrating sustainability and efficiency into every step. It offers a unified solution that enhances procurement processes while prioritizing environmental responsibility.</p>
@@ -200,7 +197,6 @@
             </ul>
         </div>
 
-        <!-- FAQs -->
         <div class="faqs">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
@@ -217,7 +213,6 @@
             </div>
         </div>
 
-        <!-- Testimonials -->
         <div class="testimonials">
             <h2>What Our Users Say</h2>
             <div class="testimonial-item">
@@ -230,7 +225,6 @@
             </div>
         </div>
 
-        <!-- Case Studies -->
         <div class="case-studies">
             <h2>Case Studies</h2>
             <div class="case-study-item">
@@ -244,7 +238,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2024 Eco-Friendly Procurement Platform. All rights reserved.</p>
@@ -252,7 +245,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

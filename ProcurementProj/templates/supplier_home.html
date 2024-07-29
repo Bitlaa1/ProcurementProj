@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-section h2 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .info-section p {
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="{% url 'home2' %}">Home</a>
+            <a href="#">Logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Welcome to the Supplier Home Page</h1>
+        <div class="welcome-message">
+            Hello, {{ supplier_name }}!
+        </div>
+        <div class="info-section">
+            <h2>Supplier Information</h2>
+            <p><strong>Contact Person:</strong> {{ contact_person }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p><strong>Phone:</strong> {{ country_code }} {{ mobile_number }}</p>
+            <p><strong>Address:</strong> {{ address }}, {{ address2 }}, {{ city }}, {{ state }}, {{ zip_code }}, {{ country }}</p>
+            <p><strong>Product Category:</strong> {{ product_category }}</p>
+            <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Procurement System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

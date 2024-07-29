@@ -35,4 +35,7 @@ urlpatterns = [
     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('service_terms/', views.service_terms, name='service_terms'),
     path('setting_nav/', views.setting_nav, name='setting_nav'),
+    path('supplier_register/', views.supplier_register, name='supplier_register'),
+    path('supplier_login/', views.supplier_login, name='supplier_login'),
+    path('supplier_home/', views.supplier_home, name='supplier_home'),
 ]

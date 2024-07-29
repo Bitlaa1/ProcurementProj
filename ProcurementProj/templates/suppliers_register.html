@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Supplier Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .form-container {
+            background-color: #fff;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .cancel-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .error {
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var terms = document.getElementById('terms').checked;
+            var error = '';
+
+            if (password !== confirmPassword) {
+                error = "Passwords do not match.";
+            } else if (!terms) {
+                error = "You must agree to the terms and conditions.";
+            }
+
+            if (error) {
+                document.getElementById('error-message').innerText = error;
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="{% url 'home2' %}">Home</a>
+            <a href="{% url 'supplier_login' %}">Login</a>
+        </div>
+    </nav>
+    <div class="form-container">
+        <h1>Create Supplier Account</h1>
+        <div id="error-message" class="error"></div>
+        <form method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="supplier_name">Supplier Name</label>
+                <input type="text" id="supplier_name" name="supplier_name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_person">Contact Person</label>
+                <input type="text" id="contact_person" name="contact_person" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="country_code">Country Code</label>
+                <input type="text" id="country_code" name="country_code" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile_number">Mobile Number</label>
+                <input type="text" id="mobile_number" name="mobile_number" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="zip_code">Zip Code</label>
+                <input type="text" id="zip_code" name="zip_code" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="form-group">
+                <label for="product_category">Product Category</label>
+                <input type="text" id="product_category" name="product_category" required>
+            </div>
+            <div class="form-group">
+                <label for="payment_method">Payment Method</label>
+                <input type="text" id="payment_method" name="payment_method" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm_password" required>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="terms" name="terms">
+                <label for="terms">I agree to the terms and conditions</label>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="save-btn">Save</button>
+                <button type="button" class="cancel-btn" onclick="window.location.href='{% url 'home2' %}'">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 Procurement System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
